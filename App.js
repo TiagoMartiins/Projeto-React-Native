@@ -2,8 +2,6 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import Home from './src/screens/Home'
 import Description from './src/screens/Description'
-import {createDrawerNavigator} from 'react-native-drawer'
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 

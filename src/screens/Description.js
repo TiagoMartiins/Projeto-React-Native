@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { ScrollView, Text,View,Button,Image } from 'react-native'
+import React from 'react'
+import { ScrollView, Text,View,Button,Image,StyleSheet } from 'react-native'
+
 
 
 
@@ -7,30 +8,55 @@ export default function Description({ route, navigation }) {
     /* 2. Get the param */
     const { hero } = route.params;
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.view}>
+        <Image style={styles.image} source={{uri:hero.image}}></Image>
          <ScrollView>
-                <Image style={{height: 150, width: 150, borderRadius: 25,alignContent:'center',margin: '5px 5px 5px 5px'}} source={{uri:hero.image}}></Image>
-                <Text style={{padding:10, fontSize:20}}>{hero.name}</Text>
-                <Text style={{padding:10}}>{hero.type}</Text>
+                <Text style={styles.title}>{hero.name}</Text>
+                <View style={styles.secondView}>
+                <Text style={styles.text}>Type:{hero.type}</Text>
+                <Text style={styles.text}>Status:{hero.status}</Text>
+                <Text style={styles.text}>Gender:{hero.gender}</Text>
+                <Text style={styles.text}>Specie:{hero.species}</Text>
+                <Text style={styles.text}>Origin Name:{hero.origin.name}</Text>
+                </View>
            </ScrollView> 
-        <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
       </View>
     );
   }
-
-/*
-export default class Description extends Component{
-
- componentDidMount(){
- }
-    render() {
-        const { hero } = this.props.navigation.state.params
-        return (
-           <ScrollView>
-                <Text style={{padding:10, fontSize:20}}>{hero.name}</Text>
-                <Text style={{padding:10}}>{hero.type}</Text>
-           </ScrollView> 
-        )
+  
+  const styles = StyleSheet.create({
+    secondView: {
+      justifyContent:'flex-start',
+      elevation:10,
+      opacity:90
+    },
+    title:{
+      padding:10, 
+      fontSize:25,
+      textAlign:'center',
+      alignContent:'center',
+      fontWeight:'bold',
+    },
+    text:{
+      padding:10,
+      textAlign:'left',
+      fontWeight:'bold',
+      borderBottomWidth: 0.5,
+      borderStyle:'dotted',
+      borderWidth:2
+    },
+    image:{
+      height: 150, 
+      width: 200, 
+      borderRadius: 25,
+      margin: 5,
+      justifyContent:'center',
+      alignContent:'center'
+    },
+    view:{
+      flex: 1, 
+      alignItems: 'center', 
+      justifyContent: 'center'
     }
-} */
+  })
+

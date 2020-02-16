@@ -1,25 +1,23 @@
 import React from 'react'
-import { TouchableOpacity, View, FlatList, Text, Image } from 'react-native'
-
-
+import { TouchableOpacity, View, FlatList, Text, Image,StyleSheet } from 'react-native'
+import api from '../service/api'
 
 export default class Home extends React.PureComponent {
     
     state = {
         data: []
     }
-    
+
     async componentDidMount() {
-        const response = await fetch('http://rickandmortyapi.com/api/character/')
-        const responseJson = await response.json()
-        this.setState({data: responseJson.results})
-    }
+        const response =  await api.get('character')
+        this.setState({data:response.data.results})
+      }
 
     _renderItem = ({item}) => {
       return  (
-          <TouchableOpacity onPress={()=>this._onItemPress(item)} style={{flexDirection:'row', padding: 10, alignItems:'center'}}>
-              <Image style={{height: 50, width: 50, borderRadius: 25}} source={{uri: item.image}}></Image>
-              <Text style={{marginLeft: 10}}>{item.name}</Text>
+          <TouchableOpacity onPress={()=>this._onItemPress(item)} style={styles.touchable}>
+              <Image style={styles.image} source={{uri: item.image}}></Image>
+              <Text style={styles.text}>{item.name}</Text>
           </TouchableOpacity>
       )
   }
@@ -41,3 +39,20 @@ export default class Home extends React.PureComponent {
       )
   }
 }
+
+const styles = StyleSheet.create({
+    image:{
+      height: 50, 
+      width: 50, 
+      borderRadius: 25
+    },
+    text:{
+      marginLeft: 10
+    },
+    touchable:{
+        flexDirection:'row', 
+        padding: 10, 
+        alignItems:'center',
+        borderBottomWidth: 0.5,
+    }
+})
